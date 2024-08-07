@@ -1,0 +1,21 @@
+# Função para definir ícone de branch Git
+git_branch_icon() {
+  if git rev-parse --is-inside-work-tree &> /dev/null; then
+    echo "%{$fg[magenta]%}→  %{$reset_color%}"  # Ícone para repositório Git
+  else
+    echo ""  # Nenhum ícone se não estiver em um repositório Git
+  fi
+}
+
+# Definindo a cor ciano para o tempo
+local time="%{$fg[cyan]%}%D{%H:%M:%S}%{$reset_color%}"
+
+# Definindo a cor azul para o símbolo λ
+local lambda_color="%{$fg[magenta]%}"
+
+# Configuração do Prompt
+PROMPT='[${time}] ${lambda_color}λ%{$reset_color%} : %~ $(git_branch_icon)$(git_prompt_info)%{$reset_color%}'
+
+# Configurações do Prompt Git
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
